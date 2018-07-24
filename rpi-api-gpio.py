@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
-import os
+from flask_sslify import SSLify
 
-ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
+sslify = SSLify(app)
 
 @app.route('/')
 def index():
@@ -15,4 +15,4 @@ def names():
 
 if __name__ == "__main__":
     context = ('ssl.crt', 'ssl.key')
-    app.run(host='0.0.0.0', ssl_context=context, threaded=True, debug=True)
+    app.run(host='0.0.0.0', ssl_context=context, threaded=True, debug=False)
