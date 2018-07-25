@@ -69,7 +69,7 @@ class SystemInformation():
             return dict(memory_usage_info = item)
 
     def get_os_name(self):
-        os_info = subprocess.check_output("cat /etc/*-release | grep PRETTY_NAME | cut -d= -f2", shell=True).replace('\"', '')
+        os_info = subprocess.check_output("cat /etc/*-release | grep PRETTY_NAME | cut -d= -f2", shell=True).decode('utf8').strip().replace('\"', '')
         return dict(os_name=os_info)
 
     def get_cpu_usage_info(self):
@@ -82,15 +82,15 @@ class SystemInformation():
             return dict(cpu_usage_info = item)
 
     def get_cpu_processor_count(self):
-        proc_info = subprocess.check_output("nproc", shell=True).replace('\"', '')
+        proc_info = subprocess.check_output("nproc", shell=True).decode('utf8').strip().replace('\"', '')
         return dict(cpu_processor_count=proc_info)
 
     def get_cpu_core_frequency(self):
-        core_frequency = subprocess.check_output("vcgencmd get_config arm_freq | cut -d= -f2", shell=True).replace('\"', '')
+        core_frequency = subprocess.check_output("vcgencmd get_config arm_freq | cut -d= -f2", shell=True).decode('utf8').strip().replace('\"', '')
         return dict(cpu_core_frequency=core_frequency)
 
     def get_cpu_core_volt(self):
-        core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True).replace('\"', '')
+        core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True).decode('utf8').strip().replace('\"', '')
         return dict(cpu_core_volt=core_volt)
 
     def get_cpu_temperature(self):
