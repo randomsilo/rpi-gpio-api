@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 from werkzeug import serving
+from datetime import datetime
 import ssl
 import platform
 import subprocess
@@ -41,7 +42,7 @@ class SystemInformation():
 
     def get_cpu_generic_details(self):
         try:
-            items = [s.split('\t: ') for s in subprocess.check_output(["cat /proc/cpuinfo  | grep 'model name\|Hardware\|Serial' | uniq "], shell=True).splitlines()]
+            items = [s.split('\t: ') for s in subprocess.check_output(["cat /proc/cpuinfo  | grep 'model name\|Hardware\|Serial' | uniq "], shell=True).decode('utf8').splitlines()]
         except Exception as ex:
             print(ex)
         finally:
@@ -50,8 +51,8 @@ class SystemInformation():
     def get_boot_info(self):
         item = {'start_time': 'Na','running_since':'Na'}
         try:
-            item['running_duration'] = subprocess.check_output(['uptime -p'], shell=True)
-            item['start_time'] = subprocess.check_output(['uptime -s'], shell=True)
+            item['running_duration'] = subprocess.check_output(['uptime -p'], shell=True).decode('utf8')
+            item['start_time'] = subprocess.check_output(['uptime -s'], shell=True).decode('utf8')
         except Exception as ex:
             print(ex)
         finally:
@@ -60,8 +61,8 @@ class SystemInformation():
     def get_memory_usage_info(self):
         try:
             item = {'total': 0,'used': 0,'available': 0 }
-            item['total']=  subprocess.check_output(["free -m -t | awk 'NR==2' | awk '{print $2'}"], shell=True)
-            item['used']=  subprocess.check_output(["free -m -t | awk 'NR==3' | awk '{print $3'}"], shell=True)
+            item['total']=  subprocess.check_output(["free -m -t | awk 'NR==2' | awk '{print $2'}"], shell=True).decode('utf8')
+            item['used']=  subprocess.check_output(["free -m -t | awk 'NR==3' | awk '{print $3'}"], shell=True).decode('utf8')
             item['available']= int(item['total'])- int(item['used'])
         except Exception as ex:
             print(ex)
@@ -75,7 +76,7 @@ class SystemInformation():
     def get_cpu_usage_info(self):
         item = {'in_use': 0}
         try:
-            item['in_use'] = subprocess.check_output("top -b -n2 | grep 'Cpu(s)'|tail -n 1 | awk '{print $2 + $4 }'", shell=True)
+            item['in_use'] = subprocess.check_output("top -b -n2 | grep 'Cpu(s)'|tail -n 1 | awk '{print $2 + $4 }'", shell=True).decode('utf8')
         except Exception as ex:
             print(ex)
         finally:
@@ -110,7 +111,7 @@ class SystemInformation():
 
     def get_disk_usage_list(self):
         try:
-            items = [s.split() for s in subprocess.check_output(['df', '-h'], universal_newlines=True).splitlines()]
+            items = [s.split() for s in subprocess.check_output(['df', '-h'], universal_newlines=True).decode('utf8').splitlines()]
         except Exception as ex:
             print(ex)
         finally:
@@ -118,7 +119,7 @@ class SystemInformation():
 
     def get_running_process_list(self):
         try:
-            items = [s.split() for s in subprocess.check_output(["ps -Ao user,pid,pcpu,pmem,comm,lstart --sort=-pcpu"], shell=True).splitlines()]
+            items = [s.split() for s in subprocess.check_output(["ps -Ao user,pid,pcpu,pmem,comm,lstart --sort=-pcpu"], shell=True).decode('utf8').splitlines()]
         except Exception as ex:
             print(ex)
         finally:
