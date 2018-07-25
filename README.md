@@ -21,9 +21,3 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ssl.key -out ss
 # Positive SSL
 sudo openssl req -new -newkey rsa:2048 -nodes -keyout ssl.key -out ssl.csr
 ```
-
-## Force SSL
-
-```
-pip3 install Flask-SSLify
-```

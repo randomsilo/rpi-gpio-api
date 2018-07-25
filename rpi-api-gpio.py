@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
-from flask_sslify import SSLify
+from werkzeug import serving
+import ssl
 
 app = Flask(__name__)
-sslify = SSLify(app)
 
 @app.route('/')
 def index():
@@ -13,6 +13,6 @@ def names():
     data = {"names": ["John", "Jacob", "Julie", "Jennifer"]}
     return jsonify(data)
 
-if __name__ == "__main__":
-    context = ('ssl.crt', 'ssl.key')
-    app.run(host='0.0.0.0', ssl_context=context, threaded=True, debug=False)
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.load_cert_chain("ssl.crt", "ssl.key")
+serving.run_simple("0.0.0.0", 8000, app, ssl_context=context)
