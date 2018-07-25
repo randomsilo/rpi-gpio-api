@@ -19,27 +19,8 @@ def names():
     }
     return jsonify(data)
 
-# Start Page
-@app.route('/')
-@app.route('/info')
-def index():
-    sys_data = {"current_time": '',"machine_name": ''}
-    try:
-        sys_data['current_time'] = datetime.now().strftime("%d-%b-%Y , %I : %M : %S %p")
-        sys_data['machine_name'] =  platform.node()
-        cpu_genric_info = cpu_generic_details()
-        disk_usage_info = disk_usage_list()
-        running_process_info = running_process_list()
-    except Exception as ex:
-        print(ex)
-    finally:
-        return render_template("index.html", title='Raspberry Pi - System Information',
-                            sys_data = sys_data,
-                            cpu_genric_info = cpu_genric_info,
-                            disk_usage_info= disk_usage_info,
-                            running_process_info = running_process_info)
 
-
+# System Information Functions
 def cpu_generic_details():
     try:
         items = [s.split('\t: ') for s in subprocess.check_output(["cat /proc/cpuinfo  | grep 'model name\|Hardware\|Serial' | uniq "], shell=True).splitlines()]
@@ -148,6 +129,26 @@ def utility_processor():
     return dict(short_date=short_date)
 
 
+# Start Page
+@app.route('/')
+@app.route('/info')
+def index():
+    sys_data = {"current_time": '',"machine_name": ''}
+    try:
+        sys_data['current_time'] = datetime.now().strftime("%d-%b-%Y , %I : %M : %S %p")
+        sys_data['machine_name'] =  platform.node()
+        cpu_genric_info = cpu_generic_details()
+        disk_usage_info = disk_usage_list()
+        running_process_info = running_process_list()
+    except Exception as ex:
+        print(ex)
+    finally:
+        return render_template("index.html", 
+            title='System Information',
+            sys_data = sys_data,
+            cpu_genric_info = cpu_genric_info,
+            disk_usage_info= disk_usage_info,
+            running_process_info = running_process_info)
 
 # Web Server Setup
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
