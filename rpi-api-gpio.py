@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, jsonify
 from werkzeug import serving
 import ssl
 import platform
@@ -120,7 +120,7 @@ def cpu_temperature():
             cpuInfo['color'] = 'red'
         return cpuInfo
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return dict(cpu_temperature=cpuInfo)
 
