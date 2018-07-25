@@ -1,16 +1,23 @@
 from flask import Flask, jsonify
 from werkzeug import serving
 import ssl
+import platform
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Flask is running!'
+    return 'rpi-api-gpio is active.'
 
-@app.route('/data')
+@app.route('/device')
 def names():
-    data = {"names": ["John", "Jacob", "Julie", "Jennifer"]}
+    data = {
+        "platform.machine": platform.machine()
+        , "platform.version": platform.version()
+        , "platform.uname": platform.uname()
+        , "platform.system": platform.system()
+        , "platform.processor": platform.processor()
+    }
     return jsonify(data)
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
