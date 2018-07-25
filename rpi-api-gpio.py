@@ -137,18 +137,18 @@ def index():
     sys_info = SystemInformation()
     data = {
         "sys_data": sys_info.sys_data
-        "os_name": sys_info.os_name
-        "cpu_usage_info": sys_info.cpu_usage_info
-        "cpu_processor_count": sys_info.cpu_processor_count
-        "cpu_core_frequency": sys_info.cpu_core_frequency
-        "cpu_core_volt": sys_info.cpu_core_volt
-        "cpu_temperature": sys_info.cpu_temperature
-        "boot_info": sys_info.boot_info
-        "memory_usage_info": sys_info.memory_usage_info
-        "cpu_genric_info": sys_info.cpu_genric_info
-        "disk_usage_info": sys_info.disk_usage_info
-        "running_process_info": sys_info.running_process_info
-        "utility_processor": sys_info.utility_processor
+        , "os_name": sys_info.os_name
+        , "cpu_usage_info": sys_info.cpu_usage_info
+        , "cpu_processor_count": sys_info.cpu_processor_count
+        , "cpu_core_frequency": sys_info.cpu_core_frequency
+        , "cpu_core_volt": sys_info.cpu_core_volt
+        , "cpu_temperature": sys_info.cpu_temperature
+        , "boot_info": sys_info.boot_info
+        , "memory_usage_info": sys_info.memory_usage_info
+        , "cpu_genric_info": sys_info.cpu_genric_info
+        , "disk_usage_info": sys_info.disk_usage_info
+        , "running_process_info": sys_info.running_process_info
+        , "utility_processor": sys_info.utility_processor
     }
     return jsonify(data)
 
