@@ -31,7 +31,7 @@ def index():
         disk_usage_info = disk_usage_list()
         running_process_info = running_process_list()
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return render_template("index.html", title='Raspberry Pi - System Information',
                             sys_data = sys_data,
@@ -44,7 +44,7 @@ def cpu_generic_details():
     try:
         items = [s.split('\t: ') for s in subprocess.check_output(["cat /proc/cpuinfo  | grep 'model name\|Hardware\|Serial' | uniq "], shell=True).splitlines()]
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return items
 
@@ -55,7 +55,7 @@ def boot_info():
         item['running_duration'] = subprocess.check_output(['uptime -p'], shell=True)
         item['start_time'] = subprocess.check_output(['uptime -s'], shell=True)
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return dict(boot_info = item)
 
@@ -68,7 +68,7 @@ def memory_usage_info():
         item['used']=  subprocess.check_output(["free -m -t | awk 'NR==3' | awk '{print $3'}"], shell=True)
         item['available']= int(item['total'])- int(item['used'])
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return dict(memory_usage_info = item)
 
@@ -85,7 +85,7 @@ def cpu_usage_info():
     try:
         item['in_use'] = subprocess.check_output("top -b -n2 | grep 'Cpu(s)'|tail -n 1 | awk '{print $2 + $4 }'", shell=True)
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return dict(cpu_usage_info = item)
 
@@ -128,7 +128,7 @@ def disk_usage_list():
     try:
         items = [s.split() for s in subprocess.check_output(['df', '-h'], universal_newlines=True).splitlines()]
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return items[1:]
 
@@ -136,7 +136,7 @@ def running_process_list():
     try:
         items = [s.split() for s in subprocess.check_output(["ps -Ao user,pid,pcpu,pmem,comm,lstart --sort=-pcpu"], shell=True).splitlines()]
     except Exception as ex:
-        print ex
+        print(ex)
     finally:
         return items[1:]
 
