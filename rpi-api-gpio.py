@@ -40,7 +40,7 @@ def index():
         , "cpu_temperature": rpi_sys_info.cpu_temperature
         , "boot_info": rpi_sys_info.boot_info
         , "memory_usage_info": rpi_sys_info.memory_usage_info
-        , "cpu_genric_info": rpi_sys_info.cpu_genric_info
+        , "cpu_generic_info": rpi_sys_info.cpu_generic_info
         , "disk_usage_info": rpi_sys_info.disk_usage_info
     }
     return jsonify(data)
