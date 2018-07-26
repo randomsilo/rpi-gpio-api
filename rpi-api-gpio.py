@@ -42,8 +42,6 @@ def index():
         , "memory_usage_info": rpi_sys_info.memory_usage_info
         , "cpu_genric_info": rpi_sys_info.cpu_genric_info
         , "disk_usage_info": rpi_sys_info.disk_usage_info
-        , "running_process_info": rpi_sys_info.running_process_info
-        , "utility_processor": rpi_sys_info.utility_processor
     }
     return jsonify(data)
 

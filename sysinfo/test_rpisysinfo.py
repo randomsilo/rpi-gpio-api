@@ -21,8 +21,6 @@ class RpiSysInfoTestSuite(unittest.TestCase):
         print("\n=== %s === \n%s" % ("memory_usage_info", rpi_sys_info.get_memory_usage_info() ))
         print("\n=== %s === \n%s" % ("cpu_generic_info", rpi_sys_info.get_cpu_generic_details() ))
         print("\n=== %s === \n%s" % ("disk_usage_info", rpi_sys_info.get_disk_usage_list() ))
-        print("\n=== %s === \n%s" % ("running_process_info", rpi_sys_info.get_running_process_list() ))
-        print("\n=== %s === \n%s" % ("utility_processor", rpi_sys_info.get_utility_processor() ))
         
         assert True
 
