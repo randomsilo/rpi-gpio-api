@@ -16,10 +16,8 @@ class RpiSysInfo():
         self.cpu_temperature = None
         self.boot_info = None
         self.memory_usage_info = None
-        self.cpu_genric_info = None
+        self.cpu_generic_info = None
         self.disk_usage_info = None
-        self.running_process_info = None
-        self.utility_processor = None
 
     def refreshAll(self):
         self.os_name = self.get_os_name()
@@ -30,10 +28,8 @@ class RpiSysInfo():
         self.cpu_temperature = self.get_cpu_temperature()
         self.boot_info = self.get_boot_info()
         self.memory_usage_info = self.get_memory_usage_info()
-        self.cpu_genric_info = self.get_cpu_generic_details()
+        self.cpu_generic_info = self.get_cpu_generic_details()
         self.disk_usage_info = self.get_disk_usage_list()
-        self.running_process_info = self.get_running_process_list()
-        self.utility_processor = self.get_utility_processor()
 
     def get_cpu_generic_details(self):
         try:
@@ -86,13 +82,13 @@ class RpiSysInfo():
         return dict(cpu_core_frequency=core_frequency)
 
     def get_cpu_core_volt(self):
-        core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True).decode('utf8').strip().replace('\"', '')
+        core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True).decode('utf8').strip().decode('utf8').s.replace('\"', '')
         return dict(cpu_core_volt=core_volt)
 
     def get_cpu_temperature(self):
         cpuInfo = {'temperature': 0, 'color': 'white'}
         try:
-            cpuTemp = float(subprocess.check_output(["vcgencmd measure_temp"], shell=True).split('=')[1].split('\'')[0])
+            cpuTemp = float(subprocess.check_output(["vcgencmd measure_temp"], shell=True).decode('utf8').strip().split('=')[1].split('\'')[0])
             cpuInfo['temperature']=cpuTemp
             if cpuTemp > 40 and cpuTemp < 50:
                 cpuInfo['color'] = 'orange'
@@ -107,22 +103,8 @@ class RpiSysInfo():
     def get_disk_usage_list(self):
         items = []
         try:
-            items = [s.split() for s in subprocess.check_output(['df', '-h'], universal_newlines=True).decode('utf8').splitlines()]
+            items = [s.split() for s in subprocess.check_output(['df', '-h'], shell=True).decode('utf8').splitlines()]
         except Exception as ex:
             print(ex)
         finally:
             return items[1:]
-
-    def get_running_process_list(self):
-        items = []
-        try:
-            items = [s.split() for s in subprocess.check_output(["ps -Ao user,pid,pcpu,pmem,comm,lstart --sort=-pcpu"], shell=True).decode('utf8').splitlines()]
-        except Exception as ex:
-            print(ex)
-        finally:
-            return items[1:]
-
-    def get_utility_processor(self):
-        def short_date(a,b,c):
-            return u'{0}{1}, {2}'.format(a, b,c)
-        return dict(short_date=short_date)
