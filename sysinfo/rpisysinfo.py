@@ -54,7 +54,7 @@ class RpiSysInfo():
         except Exception as ex:
             print(ex)
         finally:
-            return dict(boot_info = item)
+            return item
 
     def get_memory_usage_info(self):
         try:
@@ -74,7 +74,7 @@ class RpiSysInfo():
         except Exception as ex:
             print(ex)
         finally:
-            return dict(memory_usage_info = item)
+            return item
 
     def get_os_name(self):
         os_info = subprocess.check_output("cat /etc/*-release | grep PRETTY_NAME | cut -d= -f2", shell=True)\
@@ -92,28 +92,28 @@ class RpiSysInfo():
         except Exception as ex:
             print(ex)
         finally:
-            return dict(cpu_usage_info = item)
+            return item
 
     def get_cpu_processor_count(self):
         proc_info = subprocess.check_output("nproc", shell=True)\
             .decode('utf8')\
             .strip()\
             .replace('\"', '')
-        return dict(cpu_processor_count=proc_info)
+        return proc_info
 
     def get_cpu_core_frequency(self):
         core_frequency = subprocess.check_output("vcgencmd get_config arm_freq | cut -d= -f2", shell=True)\
             .decode('utf8')\
             .strip()\
             .replace('\"', '')
-        return dict(cpu_core_frequency=core_frequency)
+        return core_frequency
 
     def get_cpu_core_volt(self):
         core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True)\
             .decode('utf8')\
             .strip()\
             .replace('\"', '')
-        return dict(cpu_core_volt=core_volt)
+        return core_volt
 
     def get_cpu_temperature(self):
         cpuInfo = {'temperature': 0, 'color': 'white'}
@@ -131,7 +131,7 @@ class RpiSysInfo():
         except Exception as ex:
             print(ex)
         finally:
-            return dict(cpu_temperature=cpuInfo)
+            return cpuInfo
 
     def get_disk_usage_list(self):
         items = []
