@@ -82,7 +82,7 @@ class RpiSysInfo():
         return dict(cpu_core_frequency=core_frequency)
 
     def get_cpu_core_volt(self):
-        core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True).decode('utf8').strip().decode('utf8').s.replace('\"', '')
+        core_volt = subprocess.check_output("vcgencmd measure_volts| cut -d= -f2", shell=True).decode('utf8').strip().replace('\"', '')
         return dict(cpu_core_volt=core_volt)
 
     def get_cpu_temperature(self):
