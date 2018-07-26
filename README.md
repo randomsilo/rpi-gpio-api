@@ -14,7 +14,12 @@ flask run --host=0.0.0.0
 
 ```
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ssl.key -out ssl.crt
+```
 
+## run unit tests
+
+```
+python3 -m unittest discover -v
 ```
 
 # references

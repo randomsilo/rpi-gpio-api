@@ -1,5 +1,4 @@
 import unittest
-import apostle
 
 from sysinfo.rpisysinfo import RpiSysInfo
 
