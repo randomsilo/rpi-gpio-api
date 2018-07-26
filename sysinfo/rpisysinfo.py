@@ -48,7 +48,7 @@ class RpiSysInfo():
             item['running_duration'] = subprocess.check_output(['uptime -p'], shell=True)\
                 .decode('utf8')\
                 .replace('\n', '')
-            item['start_time'] = subprocess.check_output(['uptime -s'], shell=True)
+            item['start_time'] = subprocess.check_output(['uptime -s'], shell=True)\
                 .decode('utf8')\
                 .replace('\n', '')
         except Exception as ex:
@@ -96,8 +96,8 @@ class RpiSysInfo():
 
     def get_cpu_processor_count(self):
         proc_info = subprocess.check_output("nproc", shell=True)\
-            .decode('utf8')
-            .strip()
+            .decode('utf8')\
+            .strip()\
             .replace('\"', '')
         return dict(cpu_processor_count=proc_info)
 
