@@ -43,7 +43,7 @@ class RpiSysInfo():
             return items
 
     def get_boot_info(self):
-        item = {'start_time': 'Na','running_since':'Na'}
+        item = {'running_duration': 'Na','start_time':'Na'}
         try:
             item['running_duration'] = subprocess.check_output(['uptime -p'], shell=True)\
                 .decode('utf8')\
