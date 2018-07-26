@@ -1,9 +1,7 @@
 from flask import Flask, render_template, jsonify
 from werkzeug import serving
-from datetime import datetime
 import ssl
 import platform
-import subprocess
 
 from sysinfo.rpisysinfo import RpiSysInfo
 
@@ -31,7 +29,7 @@ def names():
 def index():
     rpi_sys_info = RpiSysInfo()
     rpi_sys_info.refreshAll()
-    
+
     data = {
         "sys_data": rpi_sys_info.sys_data
         , "os_name": rpi_sys_info.os_name
