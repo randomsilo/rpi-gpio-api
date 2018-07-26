@@ -1,6 +1,6 @@
 from datetime import datetime
 import subprocess
-
+import platform
 
 # System Information Functions
 class RpiSysInfo():
