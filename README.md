@@ -6,7 +6,7 @@ restful web api for controlling rpi gpio
 ## start web server
 
 ```
-export FLASK_APP=rpi-api-gpio.py
+export FLASK_APP=rpi-gpio-api.py
 flask run --host=0.0.0.0
 ```
 
