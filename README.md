@@ -25,6 +25,7 @@ python3 -m unittest discover -v
 ## crontab
 
 ```
+chmod 750 /shop/randomsilo/rpi-gpio-api/run-rpi-gpio-api.sh
 crontab -e
 @reboot python3 /shop/randomsilo/rpi-gpio-api/run-rpi-gpio-api.sh &
 ```
