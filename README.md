@@ -28,7 +28,12 @@ python3 -m unittest discover -v
 sudo bash
 chmod 750 /shop/randomsilo/rpi-gpio-api/run-rpi-gpio-api.sh
 crontab -e
-@reboot /shop/randomsilo/rpi-gpio-api/run-rpi-gpio-api.sh &
+@reboot bash /shop/randomsilo/rpi-gpio-api/run-rpi-gpio-api.sh &
+
+#/etc/rc.local, add the following line before exit 0
+/etc/init.d/cron/start
+
+tail /var/log/syslog
 ```
 
 # references
