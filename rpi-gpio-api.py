@@ -31,10 +31,10 @@ def platform():
     rpi_sys_info.get_platform_data()
 
     data = {
-        "platform.machine": platform.machine()
-        , "platform.version": platform.version()
-        , "platform.uname": platform.uname()
-        , "platform.system": platform.system()
+        "platform.machine": rpi_sys_info.platform_machine
+        , "platform.version": rpi_sys_info.platform_version
+        , "platform.uname": rpi_sys_info.platform_uname
+        , "platform.system": rpi_sys_info.platform_system
     }
     return jsonify(data)
 

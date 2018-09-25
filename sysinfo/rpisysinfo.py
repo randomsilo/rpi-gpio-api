@@ -5,19 +5,28 @@ import platform
 # System Information Functions
 class RpiSysInfo():
     def __init__(self):
-        self.sys_data = {"current_time": '',"machine_name": ''}
-        self.sys_data['current_time'] = datetime.now().strftime("%d-%b-%Y , %I : %M : %S %p")
-        self.sys_data['machine_name'] =  platform.node()
-        self.os_name = None
+        # CPU
         self.cpu_usage_info = None
         self.cpu_processor_count = None
         self.cpu_core_frequency = None
         self.cpu_core_volt = None
         self.cpu_temperature = None
+        self.cpu_generic_info = None
+
+        # Device
         self.boot_info = None
         self.memory_usage_info = None
-        self.cpu_generic_info = None
         self.disk_usage_info = None
+        self.sys_data = {"current_time": '',"machine_name": ''}
+        self.sys_data['current_time'] = datetime.now().strftime("%d-%b-%Y , %I : %M : %S %p")
+        self.sys_data['machine_name'] =  platform.node()
+        self.os_name = None
+        
+        # Platform
+        self.platform_machine = platform.machine()
+        self.platform_version = platform.version()
+        self.platform_uname = platform.uname()
+        self.platform_system = platform.system()
 
     def get_cpu_data(self):
         self.cpu_usage_info = self.get_cpu_usage_info()
