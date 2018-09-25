@@ -23,10 +23,7 @@ class RpiSysInfo():
         self.os_name = None
         
         # Platform
-        self.platform_machine = platform.machine()
-        self.platform_version = platform.version()
-        self.platform_uname = platform.uname()
-        self.platform_system = platform.system()
+        self.platform_data = platform.uname()
 
     def get_cpu_data(self):
         self.cpu_usage_info = self.get_cpu_usage_info()

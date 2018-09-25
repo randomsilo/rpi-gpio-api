@@ -6,6 +6,19 @@ from sysinfo.rpisysinfo import RpiSysInfo
 
 app = Flask(__name__)
 
+# Index
+@app.route('/')
+def index():
+    routes = dict()
+    routes["/cpu"] = "Get CPU data like core count, temperature, and utilization."
+    routes["/device"] = "Get device data like memory, disk usage, and machine name."
+    routes["/platform"] = "Get paltform data like operating system name, version, and build."
+
+    data = {
+        "rpi-gpio-api": "1.1"
+        , "routes": routes
+    }
+    return jsonify(data)
 
 # CPU
 @app.route('/cpu')
@@ -31,10 +44,7 @@ def platform():
     rpi_sys_info.get_platform_data()
 
     data = {
-        "platform.machine": rpi_sys_info.platform_machine
-        , "platform.version": rpi_sys_info.platform_version
-        , "platform.uname": rpi_sys_info.platform_uname
-        , "platform.system": rpi_sys_info.platform_system
+        "platform": rpi_sys_info.platform_data
     }
     return jsonify(data)
 
