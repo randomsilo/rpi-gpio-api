@@ -1,7 +1,6 @@
 from flask import Flask, render_template, jsonify
 from werkzeug import serving
 import ssl
-import platform
 
 from sysinfo.rpisysinfo import RpiSysInfo
 
@@ -12,6 +11,8 @@ app = Flask(__name__)
 @app.route('/cpu')
 def cpu():
     rpi_sys_info = RpiSysInfo()
+    rpi_sys_info.get_cpu_data()
+
 
     data = {
         "cpu_usage_info": rpi_sys_info.cpu_usage_info
@@ -26,6 +27,9 @@ def cpu():
 # Platform
 @app.route('/platform')
 def platform():
+    rpi_sys_info = RpiSysInfo()
+    rpi_sys_info.get_platform_data()
+
     data = {
         "platform.machine": platform.machine()
         , "platform.version": platform.version()
@@ -39,6 +43,7 @@ def platform():
 @app.route('/device')
 def device():
     rpi_sys_info = RpiSysInfo()
+    rpi_sys_info.get_device_data()
 
     data = {
         "os_name": rpi_sys_info.os_name
