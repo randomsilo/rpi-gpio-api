@@ -82,7 +82,7 @@ class RpiSysInfo():
             item['free']=  subprocess.check_output(["free -m -t | awk 'NR==2' | awk '{print $4'}"], shell=True)\
                 .decode('utf8')\
                 .replace('\n', '')
-            item['free']=  subprocess.check_output(["free -m -t | awk 'NR==2' | awk '{print $7'}"], shell=True)\
+            item['available']=  subprocess.check_output(["free -m -t | awk 'NR==2' | awk '{print $7'}"], shell=True)\
                 .decode('utf8')\
                 .replace('\n', '')
         except Exception as ex:
@@ -95,7 +95,7 @@ class RpiSysInfo():
             .decode('utf8')\
             .strip()\
             .replace('\"', '')
-        return dict(os_name=os_info)
+        return os_info
 
     def get_cpu_usage_info(self):
         item = {'in_use': 0}
