@@ -19,18 +19,6 @@ class RpiSysInfo():
         self.cpu_generic_info = None
         self.disk_usage_info = None
 
-    def refreshAll(self):
-        self.os_name = self.get_os_name()
-        self.cpu_usage_info = self.get_cpu_usage_info()
-        self.cpu_processor_count = self.get_cpu_processor_count()
-        self.cpu_core_frequency = self.get_cpu_core_frequency()
-        self.cpu_core_volt = self.get_cpu_core_volt()
-        self.cpu_temperature = self.get_cpu_temperature()
-        self.boot_info = self.get_boot_info()
-        self.memory_usage_info = self.get_memory_usage_info()
-        self.cpu_generic_info = self.get_cpu_generic_details()
-        self.disk_usage_info = self.get_disk_usage_list()
-
     def get_cpu_generic_details(self):
         try:
             items = [s.split('\t: ') for s in subprocess.check_output(["cat /proc/cpuinfo  | grep 'model name\|Hardware\|Serial' | uniq "], shell=True)

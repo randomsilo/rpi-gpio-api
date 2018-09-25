@@ -49,6 +49,12 @@ sync
 # put SD Card into RPI
 ```
 
+## Windows
+
+[Create RPI SD Card from Windows](https://howtoraspberrypi.com/create-raspbian-sd-card-raspberry-pi-windows/)
+
+Use Win32 Disk Imager to write the latest RPI OS to the Sd Card.
+
 ## Configure as Workstation
 
 Plug in a monitor, USB hub, keyboard, mouse, and power cable.
